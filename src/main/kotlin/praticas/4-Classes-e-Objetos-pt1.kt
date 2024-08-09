@@ -19,7 +19,7 @@ class Produto {
 
 fun main() {
     val produto1 = Produto()
-    val produto2 = Produto("Cadeira", 150.0)
+    val produto2 = Produto("Cadeirazinha", 150.0)
 
     println("Produto 1: ${produto1.nome}, Preço: ${produto1.preco}")
     println("Produto 2: ${produto2.nome}, Preço: ${produto2.preco}")
