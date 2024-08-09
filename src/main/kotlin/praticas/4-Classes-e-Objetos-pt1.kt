@@ -4,80 +4,144 @@ class Produto {
     var nome: String
     var preco: Double
 
-    // Implemente os construtores conforme especificado na questão
+    // Construtor padrão
+    constructor() {
+        this.nome = "Produtozinho"
+        this.preco = 0.0
+    }
+
+    // Construtor com parâmetros
+    constructor(nome: String, preco: Double) {
+        this.nome = nome
+        this.preco = preco
+    }
 }
 
 fun main() {
-    // Crie instâncias das diferentes classes Produto utilizando os seus construtores e imprima os detalhes de cada produto.
+    val produto1 = Produto()
+    val produto2 = Produto("Cadeira", 150.0)
+
+    println("Produto 1: ${produto1.nome}, Preço: ${produto1.preco}")
+    println("Produto 2: ${produto2.nome}, Preço: ${produto2.preco}")
 }
+
 
 // Questão 2
 class Cliente {
     var nome: String = ""
     private var idade: Int = 0
 
-    // Utilize os modificadores de visibilidade para definir os atributos nome e idade conforme especificado na questão
+    fun setIdade(idade: Int) {
+        if (idade >= 0) {
+            this.idade = idade
+        } else {
+            println("Idade inválida.")
+        }
+    }
 
-    // Crie um método público na classe Cliente chamado mostrarIdade() conforme especificado na questão
+    fun mostrarIdade(): Int {
+        return idade
+    }
 }
 
-fun main() {
-    // Crie uma instância de Cliente e chame o método mostrarIdade() para verificar seu funcionamento.
-}
+//fun main() {
+//    val cliente = Cliente()
+//    cliente.nome = "João"
+//    cliente.setIdade(25)
+//
+//    println("Nome: ${cliente.nome}, Idade: ${cliente.mostrarIdade()}")
+//}
+
 
 // Questão 3
 abstract class Personagem {
-    // Crie um método abstrato atacar() conforme especificado na questão
+    abstract fun atacar()
 }
 
 class Guerreiro : Personagem() {
     override fun atacar() {
-        // Implemente o método atacar() de acordo com as características do Guerreiro
+        println("Guerreiro atacando com espada!")
     }
 }
 
 class Mago : Personagem() {
     override fun atacar() {
-        // Implemente o método atacar() de acordo com as características do Mago
+        println("Mago lançando uma bola de fogo!")
     }
 }
 
-fun main() {
-    // Crie instâncias de Guerreiro e Mago e chame o método atacar() de cada um para verificar se estão realizando os ataques corretamente de acordo com suas respectivas classes.
-}
+//fun main() {
+//    val guerreiro = Guerreiro()
+//    val mago = Mago()
+//
+//    guerreiro.atacar()
+//    mago.atacar()
+//}
+
 
 // Questão 4
 interface FormaGeometrica {
-    // Declare um método abstrato calcularArea() conforme especificado na questão
+    fun calcularArea(): Double
 }
 
 class Retangulo(val altura: Double, val largura: Double) : FormaGeometrica {
     override fun calcularArea(): Double {
-        // Implemente o método calcularArea() para o Retangulo conforme especificado na questão
+        return altura * largura
     }
 }
 
 class Circulo(val raio: Double) : FormaGeometrica {
     override fun calcularArea(): Double {
-        // Implemente o método calcularArea() para o Circulo conforme especificado na questão
+        return Math.PI * raio * raio
     }
 }
 
-fun main() {
-    // Crie instâncias dessas duas classes e chame o método calcularArea() em cada uma delas para verificar o resultado.
-}
+//fun main() {
+//    val retangulo = Retangulo(10.0, 5.0)
+//    val circulo = Circulo(7.0)
+//
+//    println("Área do Retângulo: ${retangulo.calcularArea()}")
+//    println("Área do Círculo: ${circulo.calcularArea()}")
+//}
+
 
 // Questão 5
 class ContaBancaria {
     var numeroConta: String = ""
     var nomeTitular: String = ""
+        get() = field.capitalize()
+        set(value) {
+            field = value.lowercase()
+        }
+
     private var saldo: Double = 0.0
+        set(value) {
+            if (value >= 0) {
+                field = value
+            } else {
+                println("Saldo não pode ser negativo.")
+            }
+        }
 
-    // Implemente um getter personalizado para a propriedade nomeTitular conforme especificado na questão
+    fun depositar(valor: Double) {
+        saldo += valor
+    }
 
-    // Implemente override do setter para o atributo saldo conforme especificado na questão
+    fun getSaldo(): Double {
+        return saldo
+    }
 }
 
-fun main() {
-    // Crie uma instância de ContaBancaria. Altere o nome do titular para uma string que inicie com letra minúscula e mude o saldo para um valor negativo. Imprima os valores para verificar se as regras dos getters e setters estão sendo aplicadas corretamente.
-}
+//fun main() {
+//    val conta = ContaBancaria()
+//    conta.numeroConta = "12345"
+//    conta.nomeTitular = "joão silva"
+//    conta.depositar(100.0)
+//
+//    println("Conta: ${conta.numeroConta}, Titular: ${conta.nomeTitular}, Saldo: R$ ${conta.getSaldo()}")
+//
+//    conta.nomeTitular = "Maria Souza"
+//    conta.depositar(-50.0)  // Tentativa de depósito negativo (deve ser bloqueado)
+//
+//    println("Conta: ${conta.numeroConta}, Titular: ${conta.nomeTitular}, Saldo: R$ ${conta.getSaldo()}")
+//}
